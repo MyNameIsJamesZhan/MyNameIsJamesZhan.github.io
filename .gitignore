@@ -20,3 +20,7 @@ pnpm-debug.log*
 
 # Astro
 .astro/
+
+# Personal documents
+Yunkai_Zhan_Resume.pdf
+resume_collection.docx
