@@ -1,0 +1,40 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import { PodcastReviewSchema } from "../../content/config";
+import ReviewLayout from "../../layouts/ReviewLayout.astro";
+import createSlug from "../../lib/createSlug";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("podcast-reviews");
+  return entries.map((entry) => ({
+    params: { slug: createSlug(entry.data.title, entry.slug) },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"podcast-reviews">;
+}
+
+const { entry } = Astro.props;
+const review: PodcastReviewSchema = entry.data;
+const { Content } = await entry.render();
+---
+
+<ReviewLayout
+  title={review.title}
+  description={review.description}
+  pubDate={review.pubDate}
+  rating={review.rating}
+  heroImage={review.heroImage}
+  tags={review.tags}
+  sideBarActiveItemID="podcast-reviews"
+  tagBasePath="/podcast-reviews/tag"
+  podcast={review.podcast}
+  episode={review.episode}
+  host={review.host}
+  duration={review.duration}
+  listenUrl={review.listenUrl}
+>
+  <Content />
+</ReviewLayout>

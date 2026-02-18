@@ -1,0 +1,39 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import { ProductReviewSchema } from "../../content/config";
+import ReviewLayout from "../../layouts/ReviewLayout.astro";
+import createSlug from "../../lib/createSlug";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("product-reviews");
+  return entries.map((entry) => ({
+    params: { slug: createSlug(entry.data.title, entry.slug) },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"product-reviews">;
+}
+
+const { entry } = Astro.props;
+const review: ProductReviewSchema = entry.data;
+const { Content } = await entry.render();
+---
+
+<ReviewLayout
+  title={review.title}
+  description={review.description}
+  pubDate={review.pubDate}
+  rating={review.rating}
+  heroImage={review.heroImage}
+  tags={review.tags}
+  sideBarActiveItemID="product-reviews"
+  tagBasePath="/product-reviews/tag"
+  brand={review.brand}
+  price={review.price}
+  verdict={review.verdict}
+  purchaseUrl={review.purchaseUrl}
+>
+  <Content />
+</ReviewLayout>

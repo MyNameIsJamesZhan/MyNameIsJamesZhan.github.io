@@ -1,0 +1,127 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import { Image } from "astro:assets";
+
+export interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  rating: number;
+  heroImage?: string;
+  tags?: string[];
+  sideBarActiveItemID: string;
+  tagBasePath: string;
+  // Podcast-specific
+  podcast?: string;
+  episode?: string;
+  host?: string;
+  duration?: string;
+  listenUrl?: string;
+  // Paper-specific
+  authors?: string;
+  venue?: string;
+  paperYear?: string;
+  paperUrl?: string;
+  // Product-specific
+  brand?: string;
+  price?: string;
+  verdict?: string;
+  purchaseUrl?: string;
+}
+
+const {
+  title, description, pubDate, rating, heroImage, tags = [],
+  sideBarActiveItemID, tagBasePath,
+  podcast, episode, host, duration, listenUrl,
+  authors, venue, paperYear, paperUrl,
+  brand, price, verdict, purchaseUrl,
+} = Astro.props;
+
+dayjs.extend(localizedFormat);
+const displayDate = dayjs(pubDate).format("ll");
+
+function getStars(n: number): string {
+  const rounded = Math.round(n);
+  return "★".repeat(rounded) + "☆".repeat(5 - rounded);
+}
+---
+
+<BaseLayout title={title} description={description} image={heroImage} sideBarActiveItemID={sideBarActiveItemID} ogType="article">
+  <main class="md:flex md:justify-center">
+    <article class="prose prose-lg max-w-[750px] prose-img:mx-auto">
+      {heroImage && <Image width={750} height={422} format="webp" src={heroImage} alt={title} class="w-full mb-6" />}
+      <h1 class="title my-2 text-4xl font-bold">{title}</h1>
+
+      <div class="not-prose flex flex-wrap items-center gap-3 my-2">
+        {pubDate && <time class="text-sm opacity-70">{displayDate}</time>}
+        <span class="text-yellow-500 text-lg tracking-wider" title={`${rating} out of 5`}>{getStars(rating)}</span>
+        <span class="text-sm opacity-70">{rating}/5</span>
+      </div>
+
+      {/* Podcast metadata */}
+      {podcast && (
+        <div class="not-prose flex flex-wrap gap-x-6 gap-y-1 text-sm my-3">
+          <span><strong>Show:</strong> {podcast}</span>
+          {episode && <span><strong>Episode:</strong> {episode}</span>}
+          {host && <span><strong>Host:</strong> {host}</span>}
+          {duration && <span><strong>Duration:</strong> {duration}</span>}
+        </div>
+      )}
+      {listenUrl && (
+        <div class="not-prose my-2">
+          <a href={listenUrl} target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+            Listen →
+          </a>
+        </div>
+      )}
+
+      {/* Paper metadata */}
+      {authors && (
+        <div class="not-prose flex flex-wrap gap-x-6 gap-y-1 text-sm my-3">
+          <span><strong>Authors:</strong> {authors}</span>
+          {venue && <span><strong>Venue:</strong> {venue}</span>}
+          {paperYear && <span><strong>Year:</strong> {paperYear}</span>}
+        </div>
+      )}
+      {paperUrl && (
+        <div class="not-prose my-2">
+          <a href={paperUrl} target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+            Read Paper →
+          </a>
+        </div>
+      )}
+
+      {/* Product metadata */}
+      {(brand || price || verdict) && (
+        <div class="not-prose flex flex-wrap items-center gap-x-6 gap-y-1 text-sm my-3">
+          {brand && <span><strong>Brand:</strong> {brand}</span>}
+          {price && <span><strong>Price:</strong> {price}</span>}
+          {verdict && <div class="badge badge-secondary">{verdict}</div>}
+        </div>
+      )}
+      {purchaseUrl && (
+        <div class="not-prose my-2">
+          <a href={purchaseUrl} target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+            Buy →
+          </a>
+        </div>
+      )}
+
+      {/* Tags */}
+      {tags.length > 0 && (
+        <div class="not-prose my-3">
+          {tags.map((tag) => (
+            <a href={`${tagBasePath}/${tag}`} class="badge badge-outline ml-2 no-underline">
+              {tag}
+            </a>
+          ))}
+        </div>
+      )}
+
+      <div class="divider my-2"></div>
+      <slot />
+    </article>
+  </main>
+</BaseLayout>

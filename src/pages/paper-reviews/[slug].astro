@@ -1,0 +1,39 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import { PaperReviewSchema } from "../../content/config";
+import ReviewLayout from "../../layouts/ReviewLayout.astro";
+import createSlug from "../../lib/createSlug";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("paper-reviews");
+  return entries.map((entry) => ({
+    params: { slug: createSlug(entry.data.title, entry.slug) },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"paper-reviews">;
+}
+
+const { entry } = Astro.props;
+const review: PaperReviewSchema = entry.data;
+const { Content } = await entry.render();
+---
+
+<ReviewLayout
+  title={review.title}
+  description={review.description}
+  pubDate={review.pubDate}
+  rating={review.rating}
+  heroImage={review.heroImage}
+  tags={review.tags}
+  sideBarActiveItemID="paper-reviews"
+  tagBasePath="/paper-reviews/tag"
+  authors={review.authors}
+  venue={review.venue}
+  paperYear={review.paperYear}
+  paperUrl={review.paperUrl}
+>
+  <Content />
+</ReviewLayout>
