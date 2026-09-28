@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
+import Publication from "../components/Publication.astro";
+import { publications } from "../lib/publications";
 import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug"
 
@@ -12,17 +14,26 @@ const last_posts = posts.slice(0, 3);
 <BaseLayout sideBarActiveItemID="home">
   <div class="pb-12 mt-5">
     <div class="text-xl py-1">Hey there 👋</div>
-    <div class="text-5xl font-bold">Yunkai Zhan</div>
-    <div class="text-3xl py-3 font-bold">CS&Math Student, AI Student Researcher, Software Engineer</div>
+    <div class="text-4xl font-bold">Yunkai Zhan <span class="text-2xl font-semibold opacity-80">| 詹云凯</span></div>
+    <div class="text-2xl py-3 font-serif font-medium">Think as a Researcher, Ship as an Engineer</div>
     <div class="py-2">
       <text class="text-lg">
-        I'm a Computer Science and Applied Math undergraduate at USC, deeply passionate about <b>LLM Agents</b>, <b>Reinforcement Learning (RL)</b>, and <b>Social Simulation</b>. I enjoy researching agentic frameworks and building intelligent, production-ready software systems.
+        I am pursuing a B.S. in Computer Science and Applied Math at the University of Southern California. I'm interested in <i>scalable, transferable, and data-driven methods</i> for solving real-world problems via <b>Reinforcement Learning</b>/<b>Agentic Systems</b>, in fields like <b>Coding Models</b>, <b>Robotic Data</b>, and <b>Social Simulation</b>. At USC, I work closely with <a href="https://billzhu.me" target="_blank" class="link">Wang Bill Zhu</a> and <a href="https://yuewang.xyz" target="_blank" class="link">Yue Wang</a>.
       </text>
     </div>
+    <div class="mt-4 p-4 rounded-lg bg-base-200 text-lg">
+      🎓 I will graduate in <b>May 2027</b> and am actively looking for <b>internship</b> and <b>full-time Applied Researcher / Research Engineer</b> positions. Feel free to <a href="mailto:zhanyunkai603@gmail.com" class="link">reach out</a>!
+    </div>
     <div class="mt-8">
-      <a class="btn" href="https://linkedin.com/in/yunkai-zhan" target="_blank"> LinkedIn</a>
+      <a href="https://linkedin.com/in/yunkai-zhan" target="_blank" class="btn btn-outline">LinkedIn</a>
       <a href="https://github.com/MyNameIsJamesZhan" target="_blank" class="btn btn-outline ml-5">
         GitHub
+      </a>
+      <a href="https://scholar.google.com/citations?user=C4_E-kMAAAAJ&hl=en" target="_blank" class="btn btn-outline ml-5">
+        Google Scholar
+      </a>
+      <a href="https://x.com/zhanyunkai" target="_blank" class="btn btn-outline ml-5">
+        X
       </a>
       <a href="mailto:zhanyunkai603@gmail.com" target="_blank" class="btn btn-outline ml-5">
         Email
@@ -31,24 +42,17 @@ const last_posts = posts.slice(0, 3);
   </div>
 
   <div>
-    <div class="text-3xl w-full font-bold mb-2">Projects</div>
+    <div class="text-3xl w-full font-bold mb-2">Publications</div>
   </div>
 
-  <HorizontalCard
-    title="LLM-Powered Learning Assistant"
-    img="/post_img.webp"
-    desc="Engineered a production-ready RAG pipeline using FastAPI and Vector Search. Orchestrated multi-model LLM strategy with Claude 3.5/3.7 for document summarization and QA."
-    url="#"
-    badge="AI/ML"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="USC Study Spot Finder"
-    img="/post_img.webp"
-    desc="Developed an interactive campus platform with React, SpringBoot, and MySQL for finding and voting on study spots. Features seamless user authentication and data-driven recommendations."
-    url="#"
-    badge="Full Stack"
-  />
+  {
+    publications.map((pub, i) => (
+      <>
+        {i > 0 && <div class="divider my-0" />}
+        <Publication {...pub} />
+      </>
+    ))
+  }
 
   <div>
     <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>

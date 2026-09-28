@@ -1,0 +1,26 @@
+---
+const { title, authors, venue, year, url, pdf, badge } = Astro.props;
+const me = "Yunkai Zhan";
+---
+
+<div class="rounded-lg bg-base-100 p-4">
+  <h2 class="text-xl font-bold">
+    <a href={url} target="_blank" class="hover:underline">{title}</a>
+    {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
+  </h2>
+  <p class="py-1">
+    {
+      authors.map((author, i) => (
+        <>
+          {author === me ? <b>{author}</b> : author}
+          {i < authors.length - 1 && ", "}
+        </>
+      ))
+    }
+  </p>
+  <p class="py-1 italic">{venue}{year && `, ${year}`}</p>
+  <div class="mt-2">
+    {url && <a href={url} target="_blank" class="btn btn-sm btn-outline">Paper</a>}
+    {pdf && <a href={pdf} target="_blank" class="btn btn-sm btn-outline ml-2">PDF</a>}
+  </div>
+</div>

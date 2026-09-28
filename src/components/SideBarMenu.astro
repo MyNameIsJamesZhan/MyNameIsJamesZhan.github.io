@@ -5,25 +5,13 @@ const activeClass = "bg-base-300"; // For primary color replace with `active` cl
 
 <ul class="menu grow shrink menu-md overflow-y-auto">
     <li><a class="py-3 text-base" id="home" href="/">Home</a></li>
-    <li><a class="py-3 text-base" id="projects" href="/projects">Projects</a></li>
-    <li><a class="py-3 text-base" id="services" href="/services">Services</a></li>
-    <li><a class="py-3 text-base" id="store" href="/store">Store</a></li>
+    <li><a class="py-3 text-base" id="publications" href="/publications">Publications</a></li>
     <li><a class="py-3 text-base" id="blog" href="/blog/">Blog</a></li>
-    <li><a class="py-3 text-base" id="cv" href="/cv">CV</a></li>
-    <li>
-        <details id="reviews-details">
-            <summary class="py-3 text-base">Reviews</summary>
-            <ul>
-                <li><a class="py-2 text-base" id="podcast-reviews" href="/podcast-reviews">Podcasts</a></li>
-                <li><a class="py-2 text-base" id="paper-reviews" href="/paper-reviews">Papers</a></li>
-                <li><a class="py-2 text-base" id="product-reviews" href="/product-reviews">Products</a></li>
-            </ul>
-        </details>
-    </li>
+    <li><a class="py-3 text-base" id="misc" href="/misc">Misc</a></li>
     <li>
         <a
             class="py-3 text-base"
-            href="mailto:contact.manuelernestog@gmail.com"
+            href="mailto:zhanyunkai603@gmail.com"
             target="_blank"
             referrerpolicy="no-referrer-when-downgrade">Contact</a
         >
@@ -33,11 +21,4 @@ const activeClass = "bg-base-300"; // For primary color replace with `active` cl
 <script define:vars={{ sideBarActiveItemID: sideBarActiveItemID, activeClass: activeClass }}>
 const activeItemElem = document.getElementById(sideBarActiveItemID);
 activeItemElem && activeItemElem.classList.add(activeClass);
-
-// Keep the Reviews dropdown open when a review sub-page is active
-const reviewIDs = ["podcast-reviews", "paper-reviews", "product-reviews"];
-if (reviewIDs.includes(sideBarActiveItemID)) {
-    const detailsElem = document.getElementById("reviews-details");
-    detailsElem && detailsElem.setAttribute("open", "");
-}
 </script>

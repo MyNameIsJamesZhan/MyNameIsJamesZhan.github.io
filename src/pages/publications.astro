@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Publication from "../components/Publication.astro";
+import { publications, SCHOLAR_URL } from "../lib/publications";
+---
+
+<BaseLayout title="Publications" sideBarActiveItemID="publications">
+  <div>
+    <div class="text-3xl w-full font-bold mb-5">Publications</div>
+  </div>
+
+  {
+    publications.map((pub, i) => (
+      <>
+        {i > 0 && <div class="divider my-0" />}
+        <Publication {...pub} />
+      </>
+    ))
+  }
+
+  <div class="mt-8">
+    <a href={SCHOLAR_URL} target="_blank" class="btn btn-outline">View all on Google Scholar</a>
+  </div>
+</BaseLayout>
