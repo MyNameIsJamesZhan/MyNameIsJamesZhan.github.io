@@ -3,5 +3,5 @@
 
 export const SITE_TITLE = 'Yunkai Zhan | 詹云凯';
 export const SITE_DESCRIPTION = 'Personal portfolio of Yunkai Zhan, a Computer Science and Applied Math student at USC passionate about LLM Agents, Reinforcement Learning, and AI simulation.';
-export const GENERATE_SLUG_FROM_TITLE = true
+export const GENERATE_SLUG_FROM_TITLE = false
 export const TRANSITION_API = true

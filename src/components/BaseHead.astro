@@ -2,6 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
+import { SITE_TITLE } from '../config';
 
 export interface Props {
 	title: string;
@@ -21,6 +22,7 @@ const { title, description, image = '/social_img.webp', ogType = 'website' } = A
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
 <meta name="generator" content={Astro.generator} />
+<link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={new URL('rss.xml', Astro.site)} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

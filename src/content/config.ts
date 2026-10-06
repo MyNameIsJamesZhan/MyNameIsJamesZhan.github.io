@@ -5,6 +5,8 @@ const blogSchema = z.object({
     pubDate: z.coerce.date(),
     updatedDate: z.string().optional(),
     heroImage: z.string().optional(),
+    // Used for link previews and blog cards, but not shown at the top of the post.
+    coverImage: z.string().optional(),
     badge: z.string().optional(),
     tags: z.array(z.string()).refine(items => new Set(items).size === items.length, {
         message: 'tags must be unique',
