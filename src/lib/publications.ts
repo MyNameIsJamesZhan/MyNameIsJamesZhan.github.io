@@ -4,6 +4,24 @@ export const SCHOLAR_URL = "https://scholar.google.com/citations?user=C4_E-kMAAA
 
 export const publications = [
   {
+    title: "PreciseCoder: Faithful and Generalizable Debugging Beyond Unit-Test Rewards",
+    authors: [
+      "Yunkai Zhan",
+      "Miaosen Chai",
+      "Shangshang Wang",
+      "Jike Zhong",
+      "Yuqing Yang",
+      "Deqing Fu",
+      "Serina Chang",
+      "Wang Bill Zhu",
+    ],
+    corresponding: ["Yunkai Zhan", "Wang Bill Zhu"],
+    venue: "Preprint",
+    year: "2026",
+    website: "https://precise-coder-rl.github.io",
+    badge: "Coding Models",
+  },
+  {
     title: "Humanoid Everywhere: Large-Scale Real-to-Sim Environment and Data Generator for Humanoid Loco-Manipulation",
     authors: [
       "Junying Wang",
@@ -20,7 +38,7 @@ export const publications = [
     venue: "RSS 2026 Workshop on Data-Centric Robotics: What Data Do Robots Really Need?",
     year: "2026",
     url: "https://openreview.net/forum?id=pb7jUhcCmH",
-    pdf: "https://openreview.net/pdf?id=pb7jUhcCmH",
+    website: "https://junyingw.github.io/paper/humanoid_everywhere/index.html",
     badge: "Robotics",
   },
 ];
